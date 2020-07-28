@@ -1,4 +1,4 @@
-package com.hometest.restspringbootjpa.payroll.order;
+package com.liviubiur.payroll.order;
 
 public class OrderNotFoundException extends RuntimeException {
 

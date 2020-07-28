@@ -1,8 +1,9 @@
-package com.hometest.restspringbootjpa.payroll.order;
+package com.liviubiur.payroll.order;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.RepresentationModel;
@@ -10,21 +11,18 @@ import org.springframework.hateoas.mediatype.vnderrors.VndErrors;
 import org.springframework.hateoas.mediatype.vnderrors.VndErrors.VndError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
+@RequestMapping("/orders")
 public class OrderController {
 
+  @Autowired
   private final OrderRepository orderRepository;
+  @Autowired
   private final OrderModelAssembler assembler;
 
   public OrderController(OrderRepository orderRepository,
@@ -33,7 +31,7 @@ public class OrderController {
     this.assembler = assembler;
   }
 
-  @GetMapping("/orders")
+  @GetMapping
   public CollectionModel<EntityModel<Order>> all() {
     List<EntityModel<Order>> orders = orderRepository.findAll().stream()
         .map(assembler::toModel)
@@ -43,7 +41,7 @@ public class OrderController {
         linkTo(methodOn(OrderController.class).all()).withSelfRel());
   }
 
-  @GetMapping("/orders/{id}")
+  @GetMapping("/{id}")
   public EntityModel<Order> one(@PathVariable Long id) {
     Order order = orderRepository.findById(id)
         .orElseThrow(() -> new OrderNotFoundException(id));
@@ -51,7 +49,7 @@ public class OrderController {
     return assembler.toModel(order);
   }
 
-  @PostMapping("/orders")
+  @PostMapping
   public ResponseEntity<EntityModel<Order>> newOrder(@RequestBody Order order) {
     order.setStatus(Status.IN_PROGRESS);
     Order newOrder = orderRepository.save(order);
@@ -61,7 +59,7 @@ public class OrderController {
         .body(assembler.toModel(newOrder));
   }
 
-  @DeleteMapping("/orders/{id}/cancel")
+  @DeleteMapping("/{id}/cancel")
   public ResponseEntity<RepresentationModel> cancel(@PathVariable Long id) {
     Order order = orderRepository.findById(id).orElseThrow(() -> new OrderNotFoundException(id));
 
@@ -76,7 +74,7 @@ public class OrderController {
             "You can't cancel an order that is in the " + order.getStatus() + " status"));
   }
 
-  @PutMapping("/orders/{id}/complete")
+  @PutMapping("/{id}/complete")
   public ResponseEntity<RepresentationModel> complete(@PathVariable Long id) {
     Order order = orderRepository.findById(id).orElseThrow(() -> new OrderNotFoundException(id));
 

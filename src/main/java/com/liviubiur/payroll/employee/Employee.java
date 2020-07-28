@@ -1,22 +1,22 @@
-package com.hometest.restspringbootjpa.payroll.employee;
+package com.liviubiur.payroll.employee;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Employee {
 
   private @Id @GeneratedValue Long id;
   private String firstName;
   private String lastName;
   private String role;
-
-  public Employee() {
-  }
 
   public Employee(String firstName, String lastName, String role) {
     this.firstName = firstName;

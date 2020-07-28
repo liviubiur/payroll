@@ -1,10 +1,10 @@
-package com.hometest.restspringbootjpa;
+package com.liviubiur;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RestSpringBootJpaApplicationTests {
+class PayrollApplicationTests {
 
 	@Test
 	void contextLoads() {

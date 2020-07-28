@@ -1,4 +1,4 @@
-package com.hometest.restspringbootjpa.payroll.employee;
+package com.liviubiur.payroll.employee;
 
 public class EmployeeNotFoundException extends RuntimeException {
 

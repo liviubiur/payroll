@@ -8,11 +8,11 @@
 		<version>2.2.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.home-test</groupId>
-	<artifactId>rest-spring-boot-jpa</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>rest-spring-boot-jpa</name>
-	<description>Building REST services with Spring and JPA</description>
+	<groupId>com.liviubiur</groupId>
+	<artifactId>payroll-service</artifactId>
+	<version>1.0.0</version>
+	<name>payroll-service</name>
+	<description>A simple payroll service that manages the employees of a company.</description>
 
 	<properties>
 		<java.version>11</java.version>

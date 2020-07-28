@@ -1,13 +1,13 @@
-package com.hometest.restspringbootjpa;
+package com.liviubiur;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RestSpringBootJpaApplication {
+public class PayrollApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RestSpringBootJpaApplication.class, args);
+		SpringApplication.run(PayrollApplication.class, args);
 	}
 
 }

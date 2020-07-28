@@ -1,28 +1,25 @@
-package com.hometest.restspringbootjpa.payroll.employee;
+package com.liviubiur.payroll.employee;
 
-import java.net.URISyntaxException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-
-import org.springframework.hateoas.IanaLinkRelations;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
+@RequestMapping("/employees")
 public class EmployeeController {
 
+  @Autowired
   private final EmployeeRepository repository;
+  @Autowired
   private final EmployeeResourceAssembler assembler;
 
   public EmployeeController(EmployeeRepository repository, EmployeeResourceAssembler assembler) {
@@ -30,7 +27,7 @@ public class EmployeeController {
     this.assembler = assembler;
   }
 
-  @GetMapping("/employees")
+  @GetMapping
   public CollectionModel<EntityModel<Employee>> all() {
 
     List<EntityModel<Employee>> employees = repository.findAll().stream()
@@ -41,8 +38,8 @@ public class EmployeeController {
         linkTo(methodOn(EmployeeController.class).all()).withSelfRel());
   }
 
-  @PostMapping("/employees")
-  public ResponseEntity<?> newEmployee(@RequestBody Employee newEmployee) throws URISyntaxException {
+  @PostMapping
+  public ResponseEntity<?> newEmployee(@RequestBody Employee newEmployee) {
 
     EntityModel<Employee> entityModel = assembler.toModel(repository.save(newEmployee));
 
@@ -50,7 +47,7 @@ public class EmployeeController {
         .body(entityModel);
   }
 
-  @GetMapping("/employees/{id}")
+  @GetMapping("/{id}")
   public EntityModel<Employee> one(@PathVariable Long id) {
 
     Employee employee = repository.findById(id)
@@ -58,9 +55,8 @@ public class EmployeeController {
     return assembler.toModel(employee);
   }
 
-  @PutMapping("/employees/{id}")
-  public ResponseEntity<?> replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id)
-      throws URISyntaxException {
+  @PutMapping("/{id}")
+  public ResponseEntity<?> replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
 
     Employee updateEmployee = repository.findById(id)
         .map(employee -> {
@@ -80,7 +76,7 @@ public class EmployeeController {
         .body(entityModel);
   }
 
-  @DeleteMapping("/employees/{id}")
+  @DeleteMapping("/{id}")
   public ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
     repository.deleteById(id);
 
