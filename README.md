@@ -14,7 +14,7 @@ A simple payroll service that manages the employees of a company.
 
 ### Clone Project
 
-`git clone https://github.com/liviubiur/rest-spring-boot-jpa.git`
+`git clone https://github.com/liviubiur/payroll.git`
 
 
 ### Web API
