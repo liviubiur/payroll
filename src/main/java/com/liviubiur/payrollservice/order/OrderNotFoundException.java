@@ -1,4 +1,4 @@
-package com.liviubiur.payroll.order;
+package com.liviubiur.payrollservice.order;
 
 public class OrderNotFoundException extends RuntimeException {
 

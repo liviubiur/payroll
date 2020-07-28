@@ -1,4 +1,4 @@
-package com.liviubiur.payroll.employee;
+package com.liviubiur.payrollservice.employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;

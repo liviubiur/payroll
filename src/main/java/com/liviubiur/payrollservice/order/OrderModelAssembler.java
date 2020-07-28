@@ -1,4 +1,4 @@
-package com.liviubiur.payroll.order;
+package com.liviubiur.payrollservice.order;
 
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;

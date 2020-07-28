@@ -1,4 +1,4 @@
-package com.liviubiur.payroll.employee;
+package com.liviubiur.payrollservice.employee;
 
 public class EmployeeNotFoundException extends RuntimeException {
 

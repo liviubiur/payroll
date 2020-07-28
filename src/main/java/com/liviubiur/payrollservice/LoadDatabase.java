@@ -1,10 +1,10 @@
-package com.liviubiur.payroll;
+package com.liviubiur.payrollservice;
 
-import com.liviubiur.payroll.employee.Employee;
-import com.liviubiur.payroll.employee.EmployeeRepository;
-import com.liviubiur.payroll.order.Order;
-import com.liviubiur.payroll.order.OrderRepository;
-import com.liviubiur.payroll.order.Status;
+import com.liviubiur.payrollservice.employee.Employee;
+import com.liviubiur.payrollservice.employee.EmployeeRepository;
+import com.liviubiur.payrollservice.order.Order;
+import com.liviubiur.payrollservice.order.OrderRepository;
+import com.liviubiur.payrollservice.order.Status;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
