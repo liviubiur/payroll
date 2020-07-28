@@ -21,13 +21,13 @@ A simple payroll service that manages the employees of a company.
 
 Method | Description                 | URL          
 -------| -------------------------|:-------------:
-GET    | Return all the employee resources | /employees
-GET    | Return an employee resource by ID | /employees/{id}
-POST   | Save a new employee      | /employees
-PUT    | Edit an employee resource by ID   | /employees/{id}
-DELETE | Delete an employee resource by ID | /employees/{id}
-GET    | Return all the order resources | /orders
-GET    | Return an order resource by ID | /orders/{id}
-POST   | Save a new order      | /orders
-PUT    | Complete an order   | /orders/{id}/complete
-DELETE | Cancel an order | /orders/{id}/cancel
+GET    | Return all the employee resources | /payroll-service/employees
+GET    | Return an employee resource by ID | /payroll-service/employees/{id}
+POST   | Save a new employee      | /payroll-service/employees
+PUT    | Edit an employee resource by ID   | /payroll-service/employees/{id}
+DELETE | Delete an employee resource by ID | /payroll-service/employees/{id}
+GET    | Return all the order resources | /payroll-service/orders
+GET    | Return an order resource by ID | /payroll-service/orders/{id}
+POST   | Save a new order      | /payroll-service/orders
+PUT    | Complete an order   | /payroll-service/orders/{id}/complete
+DELETE | Cancel an order | /payroll-service/orders/{id}/cancel
