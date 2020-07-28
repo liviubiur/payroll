@@ -19,6 +19,7 @@ public class OrderModelAssembler implements RepresentationModelAssembler<Order, 
     if (entity.getStatus() == Status.IN_PROGRESS) {
       orderModel.add(linkTo(methodOn(OrderController.class)
           .cancel(entity.getId())).withRel("cancel"));
+
       orderModel.add(
           linkTo(methodOn(OrderController.class).complete(entity.getId())).withRel("complete"));
     }

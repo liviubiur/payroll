@@ -14,7 +14,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "CUSTOMER_ORDER")
 public class Order {
 
-  private @Id @GeneratedValue Long id;
+  @Id
+  @GeneratedValue
+  private Long id;
   private String description;
   private Status status;
 

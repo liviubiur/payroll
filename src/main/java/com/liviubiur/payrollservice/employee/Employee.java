@@ -12,7 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Employee {
 
-  private @Id @GeneratedValue Long id;
+  @Id
+  @GeneratedValue
+  private Long id;
   private String firstName;
   private String lastName;
   private String role;

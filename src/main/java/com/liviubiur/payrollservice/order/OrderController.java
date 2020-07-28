@@ -60,7 +60,7 @@ public class OrderController {
   }
 
   @DeleteMapping("/{id}/cancel")
-  public ResponseEntity<RepresentationModel> cancel(@PathVariable Long id) {
+  public ResponseEntity<?> cancel(@PathVariable Long id) {
     Order order = orderRepository.findById(id).orElseThrow(() -> new OrderNotFoundException(id));
 
     if (order.getStatus() == Status.IN_PROGRESS) {
@@ -75,7 +75,7 @@ public class OrderController {
   }
 
   @PutMapping("/{id}/complete")
-  public ResponseEntity<RepresentationModel> complete(@PathVariable Long id) {
+  public ResponseEntity<?> complete(@PathVariable Long id) {
     Order order = orderRepository.findById(id).orElseThrow(() -> new OrderNotFoundException(id));
 
     if (order.getStatus() == Status.IN_PROGRESS) {

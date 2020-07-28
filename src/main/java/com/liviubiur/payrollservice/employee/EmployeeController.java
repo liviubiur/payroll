@@ -52,6 +52,7 @@ public class EmployeeController {
 
     Employee employee = repository.findById(id)
         .orElseThrow(() -> new EmployeeNotFoundException(id));
+
     return assembler.toModel(employee);
   }
 
@@ -71,7 +72,7 @@ public class EmployeeController {
 
     EntityModel<Employee> entityModel = assembler.toModel(updateEmployee);
 
-    return  ResponseEntity
+    return ResponseEntity
         .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
         .body(entityModel);
   }
