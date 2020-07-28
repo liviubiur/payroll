@@ -1,4 +1,4 @@
-# payroll
+# payroll-service
 A demo project for building a RESTful service with Spring HATEOAS.
 
 A simple payroll service that manages the employees of a company. 
