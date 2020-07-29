@@ -25,9 +25,7 @@ public class LoadDatabase {
       orderRepository.save(new Order("Asus", Status.COMPLETED));
       orderRepository.save(new Order("Kindle", Status.IN_PROGRESS));
 
-      orderRepository.findAll().forEach(order -> {
-        log.info("Preload " + order);
-      });
+      orderRepository.findAll().forEach(order -> log.info("Preload " + order));
     };
   }
 }
