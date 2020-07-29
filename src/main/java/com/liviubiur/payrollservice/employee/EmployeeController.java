@@ -17,11 +17,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-  @Autowired
   private final EmployeeRepository repository;
-  @Autowired
   private final EmployeeResourceAssembler assembler;
 
+  @Autowired
   public EmployeeController(EmployeeRepository repository, EmployeeResourceAssembler assembler) {
     this.repository = repository;
     this.assembler = assembler;
