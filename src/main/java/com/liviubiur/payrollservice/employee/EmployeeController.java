@@ -17,6 +17,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RequestMapping("/employees")
 public class EmployeeController {
 
+  private static final String ID = "/{id}";
+
   private final EmployeeRepository repository;
   private final EmployeeResourceAssembler assembler;
 
@@ -46,7 +48,7 @@ public class EmployeeController {
         .body(entityModel);
   }
 
-  @GetMapping("/{id}")
+  @GetMapping(ID)
   public EntityModel<Employee> one(@PathVariable Long id) {
 
     Employee employee = repository.findById(id)
@@ -55,7 +57,7 @@ public class EmployeeController {
     return assembler.toModel(employee);
   }
 
-  @PutMapping("/{id}")
+  @PutMapping(ID)
   public ResponseEntity<?> replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
 
     Employee updateEmployee = repository.findById(id)
@@ -63,7 +65,7 @@ public class EmployeeController {
         employee.setName(newEmployee.getName());
         employee.setRole(newEmployee.getRole());
         return repository.save(employee);
-    })
+        })
         .orElseGet(() -> {
           newEmployee.setId(id);
           return repository.save(newEmployee);
@@ -76,7 +78,7 @@ public class EmployeeController {
         .body(entityModel);
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping(ID)
   public ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
     repository.deleteById(id);
 
