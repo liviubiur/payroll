@@ -6,13 +6,20 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.mediatype.vnderrors.VndErrors;
 import org.springframework.hateoas.mediatype.vnderrors.VndErrors.VndError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import static com.liviubiur.payrollservice.Constant.ID;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -20,11 +27,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RequestMapping("/orders")
 public class OrderController {
 
-  @Autowired
   private final OrderRepository orderRepository;
-  @Autowired
   private final OrderModelAssembler assembler;
 
+  @Autowired
   public OrderController(OrderRepository orderRepository,
       OrderModelAssembler assembler) {
     this.orderRepository = orderRepository;
@@ -33,6 +39,7 @@ public class OrderController {
 
   @GetMapping
   public CollectionModel<EntityModel<Order>> all() {
+
     List<EntityModel<Order>> orders = orderRepository.findAll().stream()
         .map(assembler::toModel)
         .collect(Collectors.toList());
@@ -41,7 +48,7 @@ public class OrderController {
         linkTo(methodOn(OrderController.class).all()).withSelfRel());
   }
 
-  @GetMapping("/{id}")
+  @GetMapping(ID)
   public EntityModel<Order> one(@PathVariable Long id) {
     Order order = orderRepository.findById(id)
         .orElseThrow(() -> new OrderNotFoundException(id));
@@ -59,7 +66,7 @@ public class OrderController {
         .body(assembler.toModel(newOrder));
   }
 
-  @DeleteMapping("/{id}/cancel")
+  @DeleteMapping(ID + "/cancel")
   public ResponseEntity<?> cancel(@PathVariable Long id) {
     Order order = orderRepository.findById(id).orElseThrow(() -> new OrderNotFoundException(id));
 
@@ -74,7 +81,7 @@ public class OrderController {
             "You can't cancel an order that is in the " + order.getStatus() + " status"));
   }
 
-  @PutMapping("/{id}/complete")
+  @PutMapping(ID + "/complete")
   public ResponseEntity<?> complete(@PathVariable Long id) {
     Order order = orderRepository.findById(id).orElseThrow(() -> new OrderNotFoundException(id));
 
