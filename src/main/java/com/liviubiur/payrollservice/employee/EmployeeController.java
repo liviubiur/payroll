@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.liviubiur.payrollservice.Constant.ID;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
-
-  private static final String ID = "/{id}";
 
   private final EmployeeRepository repository;
   private final EmployeeResourceAssembler assembler;
